@@ -1,0 +1,410 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "owner",
+      "password": "owner",
+      "role": "OWNER"
+    },
+    {
+      "id": "2",
+      "username": "manager",
+      "password": "manager",
+      "role": "MANAGER"
+    },
+    {
+      "id": "3",
+      "username": "waiter",
+      "password": "waiter",
+      "role": "WAITER"
+    },
+    {
+      "id": "4",
+      "username": "chef",
+      "password": "chef",
+      "role": "CHEF"
+    },
+    {
+      "id": "5",
+      "username": "host",
+      "password": "host",
+      "role": "HOST"
+    },
+    {
+      "id": "6",
+      "username": "admin",
+      "password": "admin",
+      "role": "ADMIN"
+    },
+    {
+      "id": "7",
+      "username": "waiter2",
+      "password": "waiter",
+      "role": "WAITER"
+    }
+  ],
+  "tables": [
+    {
+      "id": "1",
+      "status": "BOOKED",
+      "waiterId": 3
+    },
+    {
+      "id": "2",
+      "status": "BOOKED",
+      "waiterId": 3
+    },
+    {
+      "id": "3",
+      "status": "BOOKED",
+      "waiterId": 7
+    },
+    {
+      "id": "4",
+      "status": "BOOKED",
+      "waiterId": 7
+    },
+    {
+      "id": "5",
+      "status": "OPEN",
+      "waiterId": 0
+    },
+    {
+      "id": "6",
+      "status": "OPEN",
+      "waiterId": 0
+    },
+    {
+      "id": "7",
+      "status": "OPEN",
+      "waiterId": 0
+    },
+    {
+      "id": "8",
+      "status": "OPEN",
+      "waiterId": 0
+    },
+    {
+      "id": "9",
+      "status": "OPEN",
+      "waiterId": 0
+    },
+    {
+      "id": "10",
+      "status": "BOOKED",
+      "waiterId": 3
+    },
+    {
+      "id": "11",
+      "status": "OPEN",
+      "waiterId": 0
+    },
+    {
+      "id": "12",
+      "status": "OPEN",
+      "waiterId": 0
+    },
+    {
+      "id": "13",
+      "status": "OPEN",
+      "waiterId": 0
+    },
+    {
+      "id": "14",
+      "status": "OPEN",
+      "waiterId": 0
+    },
+    {
+      "id": "15",
+      "status": "BOOKED",
+      "waiterId": 7
+    },
+    {
+      "id": "16",
+      "status": "BOOKED",
+      "waiterId": 7
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "itemName": "Mutton Biryani",
+      "itemImage": "https://img.thecdn.in/403544/SKU-1252_0-1737095758299.png?format=webp",
+      "itemCategory": "Biryani's",
+      "itemPrice": "299"
+    },
+    {
+      "id": "2",
+      "itemName": "Chicken Biryani",
+      "itemImage": "https://www.licious.in/blog/wp-content/uploads/2022/06/chicken-hyderabadi-biryani-01.jpg",
+      "itemCategory": "Biryani's",
+      "itemPrice": "249"
+    },
+    {
+      "id": "3",
+      "itemName": "Prawn Biryani",
+      "itemImage": "https://www.kannammacooks.com/wp-content/uploads/prawn-biryani-eral-biriyani-recipe-1.jpg",
+      "itemCategory": "Biryani's",
+      "itemPrice": "319"
+    },
+    {
+      "id": "4",
+      "itemName": "Egg Biryani",
+      "itemImage": "https://spicecravings.com/wp-content/uploads/2020/10/Egg-Biryani-Featured-1.jpg",
+      "itemCategory": "Biryani's",
+      "itemPrice": "199"
+    },
+    {
+      "id": "5",
+      "itemName": "Veg Biryani",
+      "itemImage": "https://www.madhuseverydayindian.com/wp-content/uploads/2022/11/easy-vegetable-biryani.jpg",
+      "itemCategory": "Biryani's",
+      "itemPrice": "179"
+    },
+    {
+      "id": "6",
+      "itemName": "Paneer Biryani",
+      "itemImage": "https://www.indianhealthyrecipes.com/wp-content/uploads/2023/02/paneer-biryani-recipe.jpg",
+      "itemCategory": "Biryani's",
+      "itemPrice": "209"
+    },
+    {
+      "id": "7",
+      "itemName": "Masala Dosa",
+      "itemImage": "https://www.indianhealthyrecipes.com/wp-content/uploads/2021/06/masala-dosa-recipe.jpg",
+      "itemCategory": "South Indian",
+      "itemPrice": "99"
+    },
+    {
+      "id": "8",
+      "itemName": "Plain Dosa",
+      "itemImage": "https://www.awesomecuisine.com/wp-content/uploads/2009/06/Plain-Dosa.jpg",
+      "itemCategory": "South Indian",
+      "itemPrice": "79"
+    },
+    {
+      "id": "9",
+      "itemName": "Onion Dosa",
+      "itemImage": "https://www.archanaskitchen.com//images/archanaskitchen/1-Author/Divya_Shivaraman_/Onion_Tomato_Podi_Masala_Dosa.jpg",
+      "itemCategory": "South Indian",
+      "itemPrice": "89"
+    },
+    {
+      "id": "10",
+      "itemName": "Cheese Dosa",
+      "itemImage": "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/03/cheese-dosa.jpg",
+      "itemCategory": "South Indian",
+      "itemPrice": "129"
+    },
+    {
+      "id": "11",
+      "itemName": "Idli",
+      "itemImage": "https://t3.ftcdn.net/jpg/03/62/02/26/240_F_362022640_fZ6UM0JycJlFDdBiR1pYlNddKfdGvYwR.jpg",
+      "itemCategory": "South Indian",
+      "itemPrice": "59"
+    },
+    {
+      "id": "12",
+      "itemName": "Medu Vada",
+      "itemImage": "https://myfoodstory.com/wp-content/uploads/2022/09/Medu-Vada-5.jpg",
+      "itemCategory": "South Indian",
+      "itemPrice": "69"
+    },
+    {
+      "id": "13",
+      "itemName": "Chicken Tandoori",
+      "itemImage": "https://www.easycookingwithmolly.com/wp-content/uploads/2023/11/air-fryer-whole-tandoori-chicken-3-360x480.jpg",
+      "itemCategory": "Tandoori",
+      "itemPrice": "349"
+    },
+    {
+      "id": "14",
+      "itemName": "Paneer Tikka",
+      "itemImage": "https://www.cookwithmanali.com/wp-content/uploads/2015/07/Restaurant-Style-Recipe-Paneer-Tikka-500x500.jpg",
+      "itemCategory": "Tandoori",
+      "itemPrice": "259"
+    },
+    {
+      "id": "15",
+      "itemName": "Fish Tandoori",
+      "itemImage": "https://b2958125.smushcdn.com/2958125/wp-content/uploads/tandoori-fish.jpg?lossy=1&strip=1&webp=1",
+      "itemCategory": "Tandoori",
+      "itemPrice": "399"
+    },
+    {
+      "id": "16",
+      "itemName": "Chicken Lollipop",
+      "itemImage": "https://lanesbbq.com/cdn/shop/articles/pow-pow-chicken-lollipops.jpg?v=1674056829&width=1500",
+      "itemCategory": "Starters",
+      "itemPrice": "199"
+    },
+    {
+      "id": "17",
+      "itemName": "Spring Roll",
+      "itemImage": "https://s.lightorangebean.com/media/20240914144947/Thai-Veggie-Spring-Rolls_done.png",
+      "itemCategory": "Starters",
+      "itemPrice": "179"
+    },
+    {
+      "id": "18",
+      "itemName": "Gobi Manchurian",
+      "itemImage": "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/02/gobi-manchurian-cauliflower-manchurian.jpg",
+      "itemCategory": "Chinese",
+      "itemPrice": "149"
+    },
+    {
+      "id": "19",
+      "itemName": "Paneer Chilli",
+      "itemImage": "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/02/chilli-paneer-recipe.jpg",
+      "itemCategory": "Chinese",
+      "itemPrice": "199"
+    },
+    {
+      "id": "20",
+      "itemName": "Veg Noodles",
+      "itemImage": "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/02/veg-noodles-vegetable-noodles-recipe.jpg",
+      "itemCategory": "Chinese",
+      "itemPrice": "139"
+    },
+    {
+      "id": "21",
+      "itemName": "Chicken Noodles",
+      "itemImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVYVkaf_NZF1f5gAoDqE1nFc7hBNHeH4H69Q&s",
+      "itemCategory": "Chinese",
+      "itemPrice": "179"
+    },
+    {
+      "id": "22",
+      "itemName": "Hakka Noodles",
+      "itemImage": "https://www.indianhealthyrecipes.com/wp-content/uploads/2021/07/hakka-noodles-recipe.jpg",
+      "itemCategory": "Chinese",
+      "itemPrice": "159"
+    },
+    {
+      "id": "23",
+      "itemName": "Butter Chicken",
+      "itemImage": "https://www.cookingclassy.com/wp-content/uploads/2021/01/butter-chicken-4-1026x1536.jpg",
+      "itemCategory": "North Indian",
+      "itemPrice": "349"
+    },
+    {
+      "id": "24",
+      "itemName": "Dal Makhani",
+      "itemImage": "https://www.sharmispassions.com/wp-content/uploads/2012/05/dal-makhani7.jpg",
+      "itemCategory": "North Indian",
+      "itemPrice": "229"
+    },
+    {
+      "id": "25",
+      "itemName": "Rajma Chawal",
+      "itemImage": "https://www.secondrecipe.com/wp-content/uploads/2017/08/rajma-chawal-1.jpg",
+      "itemCategory": "North Indian",
+      "itemPrice": "199"
+    },
+    {
+      "id": "26",
+      "itemName": "Chole Bhature",
+      "itemImage": "https://images.hindi.news18.com/ibnkhabar/uploads/2021/06/chole-bhature.jpg",
+      "itemCategory": "North Indian",
+      "itemPrice": "179"
+    },
+    {
+      "id": "27",
+      "itemName": "Pav Bhaji",
+      "itemImage": "https://www.ticklingpalates.com/wp-content/uploads/2021/08/Instant-Pot-Pav-Bhaji-Recipe.jpg",
+      "itemCategory": "Street Food",
+      "itemPrice": "149"
+    },
+    {
+      "id": "28",
+      "itemName": "Vada Pav",
+      "itemImage": "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/10/vada-pav-recipe.jpg",
+      "itemCategory": "Street Food",
+      "itemPrice": "99"
+    },
+    {
+      "id": "29",
+      "itemName": "Pani Puri",
+      "itemImage": "https://cdn1.foodviva.com/static-content/food-images/snacks-recipes/pani-puri/pani-puri.jpg",
+      "itemCategory": "Street Food",
+      "itemPrice": "79"
+    },
+    {
+      "id": "30",
+      "itemName": "Dahi Puri",
+      "itemImage": "https://ministryofcurry.com/wp-content/uploads/2022/07/Dahi-Puri_-3.jpg",
+      "itemCategory": "Street Food",
+      "itemPrice": "89"
+    },
+    {
+      "id": "31",
+      "itemName": "Chocolate Brownie",
+      "itemImage": "https://recipesblob.oetker.in/assets/9a89b75f976642dcab8ae407e2f4344e/1272x764/chocolate-brownie.webp",
+      "itemCategory": "Desserts",
+      "itemPrice": "159"
+    },
+    {
+      "id": "32",
+      "itemName": "Gulab Jamun",
+      "itemImage": "https://media-cdn.tripadvisor.com/media/photo-s/1b/4e/a1/1b/dessert-gulab-jamun-rasgulla.jpg",
+      "itemCategory": "Desserts",
+      "itemPrice": "129"
+    },
+    {
+      "id": "33",
+      "itemName": "Rasmalai",
+      "itemImage": "https://www.indianhealthyrecipes.com/wp-content/uploads/2013/10/rasmalai-recipe-1-480x270.jpg",
+      "itemCategory": "Desserts",
+      "itemPrice": "149"
+    },
+    {
+      "id": "34",
+      "itemName": "Ice Cream Sundae",
+      "itemImage": "https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/MU3RGOXROII6ZLAWR67XDFGNPA.jpg",
+      "itemCategory": "Desserts",
+      "itemPrice": "179"
+    },
+    {
+      "id": "35",
+      "itemName": "Mango Lassi",
+      "itemImage": "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/04/mango-lassi-recipe.jpg",
+      "itemCategory": "Beverages",
+      "itemPrice": "99"
+    },
+    {
+      "id": "36",
+      "itemName": "Cold Coffee",
+      "itemImage": "https://c2.staticflickr.com/2/1631/24976038066_a8dafb3baf_z.jpg",
+      "itemCategory": "Beverages",
+      "itemPrice": "129"
+    },
+    {
+      "id": "37",
+      "itemName": "Masala Chai",
+      "itemImage": "https://recipes.wellcurve.in/wp-content/uploads/2022/03/Masala-Tea.jpg",
+      "itemCategory": "Beverages",
+      "itemPrice": "79"
+    },
+    {
+      "id": "38",
+      "itemName": "Oreo Shake",
+      "itemImage": "https://tastesbetterfromscratch.com/wp-content/uploads/2024/06/Oreo-Milkshake24-1.jpg",
+      "itemCategory": "Beverages",
+      "itemPrice": "149"
+    },
+    {
+      "id": "39",
+      "itemName": "Paneer Butter Masala",
+      "itemImage": "https://www.indianhealthyrecipes.com/wp-content/uploads/2014/11/paneer-butter-masala-recipe-2.jpg",
+      "itemCategory": "North Indian",
+      "itemPrice": "259"
+    },
+    {
+      "id": "40",
+      "itemName": "Chicken Curry",
+      "itemImage": "https://www.cubesnjuliennes.com/wp-content/uploads/2020/07/Instant-Pot-Chicken-Curry.jpg",
+      "itemCategory": "North Indian",
+      "itemPrice": "349"
+    }
+  ]
+}
