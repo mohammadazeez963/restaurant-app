@@ -8,6 +8,7 @@ const WaiterComponent = () => {
   const [tables, setTables] = useState([])
   const [number, setNumber] = useState(0)
   const [products, setProducts] = useState([])
+  const [orderedProducts, setOrderedProducts] = useState({})
 
   const itemCategories = products.map(product => product.itemCategory)
 
@@ -19,11 +20,39 @@ const WaiterComponent = () => {
       }).catch(error => console.log(error))
 
       fetchMenu().then(response => {
-        console.log(response.data)
+        // console.log(response.data)
           setProducts(response.data)
       }).catch(error => console.log(error))
       
   },[])
+
+  function decreaseQuantity(id){
+    var element = document.getElementById("quantity-" + id)
+    if(element.innerText > 1){
+      element.innerHTML = element.innerText - 1
+    }
+  }
+
+  function increaseQuantity(id){
+    var element = document.getElementById("quantity-" + id)
+    element.innerHTML = parseInt(element.innerText) + 1
+  }
+
+  function AddToProducts(id){
+      setOrderedProducts({...orderedProducts, [id]:{
+          id : id,
+          name : document.getElementById("name-" + id).innerText,
+          price : parseInt(document.getElementById("price-"+id).innerText.slice(13)),
+          qunatity : parseInt(document.getElementById("quantity-" + id).innerText)
+      }})
+
+      document.getElementById("button-"+id).innerHTML = "Added"
+  }
+
+  function OrderProducts(){
+    console.log(orderedProducts)
+  }
+
   return (
     <div className='container'>
         <center style={{marginTop:'20px'}}>
@@ -56,13 +85,21 @@ const WaiterComponent = () => {
                     <div key={index} className='row mb-5'>
                          <h2>{category}</h2>
                          {
-                            products.filter(product => product.itemCategory == category).map(product => (
-                              <div className="col-md-3 p-3">
+                            products.filter((product) => product.itemCategory == category).map((product,index2) => (
+                              <div key={index2} className="col-md-3 p-3">
                                 <img className="card-img-top" src={product.itemImage} alt={product.itemName} style={{width:"100%",height:"250px"}}/>
                                 <div className="card-body">
                                     <center className='mt-3'>
-                                        <h4 className="card-title">{product.itemName}</h4>
-                                        <p className="card-text">{"Item Price : " + product.itemPrice}</p>
+                                        <h4 className="card-title" id = {"name-" + product.id}>{product.itemName}</h4>
+                                        <p className="card-text mt-2" id = {"price-" + product.id}>{"Item Price : " + product.itemPrice}</p>
+                                        <div style={{display:"inline"}}>
+                                              <button className='btn btn-sm btn-outline-dark' onClick={() => decreaseQuantity(product.id)}>-</button>
+                                              <span className='m-2' id = {"quantity-" + product.id      }>1</span>
+                                              <button className='btn btn-sm btn-outline-dark' onClick={() => increaseQuantity(product.id)}>+</button>
+                                        </div>
+                                        <div className='form-group mt-3'> 
+                                           <button className='btn btn-dark' id = {"button-" + product.id} onClick={(e) => AddToProducts(product.id)}>Add</button>
+                                        </div>
                                     </center>
                                 </div>
                               </div>
