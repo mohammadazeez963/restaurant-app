@@ -87,8 +87,6 @@ const LoginComponent = () => {
                                     <option value="manager">Manager</option>
                                     <option value="waiter">Waiter</option>
                                     <option value="chef">Chef</option>
-                                    <option value="host">Host</option>
-                                    <option value="admin">Admin</option>
                                 </select>
                             </div>
 

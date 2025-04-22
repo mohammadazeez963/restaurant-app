@@ -10,19 +10,29 @@ import OwnerComponent from './components/OwnerComponent'
 import { isUserLoggedIn } from './services/AuthService'
 import ManagerComponent from './components/ManagerComponent'
 import WaiterComponent from './components/WaiterComponent'
-import HostComponent from './components/HostComponent'
-import AdminComponent from './components/AdminComponent'
+import ViewOrder from './components/ViewOrder'
+import ChefComponent from './components/ChefComponent'
+import ItemComponent from './components/ItemComponent'
+import WorkersComponent from './components/WorkersComponent'
 
 function App() {
 
   const AuthenticatedRoute = ({children}) => isUserLoggedIn() ? children : <Navigate to = "/" />;
+  const LandingPage = ({children}) => {
+    localStorage.clear();
+    sessionStorage.clear();
+    
+    return children
+  }
 
   return (
     <>
       <BrowserRouter>
         <HeaderComponent/>
         <Routes>
-            <Route path='/' element = {<LoginComponent/>}></Route>
+            <Route path='/' element = {
+              <LandingPage><LoginComponent/></LandingPage> 
+            }></Route>
             <Route path= '/owner' element= 
             {
               <AuthenticatedRoute><OwnerComponent/></AuthenticatedRoute>
@@ -41,17 +51,36 @@ function App() {
             }
             ></Route>
 
-            <Route path= '/host' element= 
+            <Route path= '/chef' element= 
             {
-              <AuthenticatedRoute><HostComponent/></AuthenticatedRoute>
+              <AuthenticatedRoute><ChefComponent/></AuthenticatedRoute>
             }
             ></Route>
 
-<           Route path= '/admin' element= 
+            <Route path= '/view-order/:id' element= 
             {
-              <AuthenticatedRoute><AdminComponent/></AuthenticatedRoute>
+              <AuthenticatedRoute><ViewOrder/></AuthenticatedRoute>
             }
             ></Route>
+
+            <Route path= '/item' element= 
+            {
+              <AuthenticatedRoute><ItemComponent/></AuthenticatedRoute>
+            }
+            ></Route>
+
+            <Route path= '/item/:id' element= 
+            {
+              <AuthenticatedRoute><ItemComponent/></AuthenticatedRoute>
+            }
+            ></Route>
+
+            <Route path= '/workers' element= 
+            {
+              <AuthenticatedRoute><WorkersComponent/></AuthenticatedRoute>
+            }
+            ></Route>
+
         </Routes>
         <FooterComponent/>
       </BrowserRouter>

@@ -6,12 +6,14 @@ import { isUserLoggedIn, logout } from '../services/AuthService'
 
 const HeaderComponent = () => {
 
-const navigate = useNavigate()
+  const navigate = useNavigate()
 
-function handleLogout(){
-    logout();
-    navigate("/")
-}
+  const urls = ['http://localhost:5173/manager', 'http://localhost:5173/owner']
+
+  function handleLogout(){
+      logout();
+      navigate("/")
+  }
 
   return (
     <div>
@@ -31,8 +33,15 @@ function handleLogout(){
                 <ul className='navbar-nav'>
 
                       {
-                        isUserLoggedIn() &&
+                        urls.indexOf(window.location.href) >= 0 &&
                         <li className='nav-item'>
+                          <NavLink to="/workers" className="nav-link" style={{color:"#ffffff"}} >Manage Workers</NavLink>
+                        </li>
+                      }
+                      
+                      {
+                        (window.location.href != 'http://localhost:5173/') &&
+                        <li className='nav-item' style={{marginLeft:'60px'}}>
                           <NavLink to="/" className="nav-link" style={{color:"#ffffff"}} onClick={handleLogout}>Logout</NavLink>
                         </li>
                       }

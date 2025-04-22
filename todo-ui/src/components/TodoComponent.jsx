@@ -7,6 +7,7 @@ const TodoComponent = () => {
     const [title,setTitle]  = useState('')
     const [description, setDescription] = useState('')
     const [completed, setCompleted] = useState(false)
+    const s = useParams()
     const {id} = useParams()
 
     const navigate = useNavigate()

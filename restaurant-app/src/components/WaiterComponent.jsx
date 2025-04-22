@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { fetchAssignedTablesofWaiter, fetchMenu } from '../services/OrderService'
+import { fetchAssignedTablesofWaiter, fetchCurrentOrderByTableId, fetchMenu, fetchOrders, placeOrder, updateOrder, updateTable } from '../services/OrderService'
+import { useNavigate } from 'react-router-dom'
 
 const WaiterComponent = () => {
-  const activeBtn = 'btn btn-outline-primary m-2 active'
-  const inactiveBtn = 'btn btn-outline-primary m-2'
   
   const [tables, setTables] = useState([])
+  const [tablesData, setTablesData] = useState([])
   const [number, setNumber] = useState(0)
   const [products, setProducts] = useState([])
   const [orderedProducts, setOrderedProducts] = useState({})
+  const [orderPendingTables, setOrderPendingTables] = useState([])
+  const [orderCompletedTables, setOrderCompletedTables] = useState([])
+  const [orders, setOrders] = useState([])
+
+  const navigate = useNavigate()
 
   const itemCategories = products.map(product => product.itemCategory)
 
@@ -16,7 +21,14 @@ const WaiterComponent = () => {
       var userId = sessionStorage.getItem("userId")
 
       fetchAssignedTablesofWaiter(userId).then(response => {
+          setTablesData(response.data)
           setTables(response.data.map(table => table.id))
+      }).catch(error => console.log(error))
+
+      fetchOrders().then(response => {
+          setOrders(response.data)
+          setOrderPendingTables(response.data.filter(order => order.status == "PENDING").map(order => order.tableId))
+          setOrderCompletedTables(response.data.filter(order => order.status == "COMPLETED").map(order => order.tableId))
       }).catch(error => console.log(error))
 
       fetchMenu().then(response => {
@@ -30,12 +42,40 @@ const WaiterComponent = () => {
     var element = document.getElementById("quantity-" + id)
     if(element.innerText > 1){
       element.innerHTML = element.innerText - 1
+      enableAddButton(id)
     }
+  }
+
+  function getTableButton(num){
+
+    let buttonStyle = ""
+
+    if(orderPendingTables.indexOf(num) >= 0){
+      buttonStyle = 'btn btn-outline-warning m-2'
+    }
+    else if(orderCompletedTables.indexOf(num) >= 0){
+      buttonStyle = 'btn btn-outline-success m-2'
+    }
+    else{
+      buttonStyle = 'btn btn-outline-primary m-2'
+    }
+
+    if(number == num){
+      buttonStyle += " active"
+    }
+
+    return buttonStyle
+  }
+
+  function enableAddButton(id){
+    document.getElementById("button-"+id).removeAttribute("disabled")
+    document.getElementById("button-"+id).innerHTML = "Add"
   }
 
   function increaseQuantity(id){
     var element = document.getElementById("quantity-" + id)
     element.innerHTML = parseInt(element.innerText) + 1
+    enableAddButton(id)
   }
 
   function AddToProducts(id){
@@ -43,14 +83,125 @@ const WaiterComponent = () => {
           id : id,
           name : document.getElementById("name-" + id).innerText,
           price : parseInt(document.getElementById("price-"+id).innerText.slice(13)),
-          qunatity : parseInt(document.getElementById("quantity-" + id).innerText)
+          quantity : parseInt(document.getElementById("quantity-" + id).innerText)
       }})
 
       document.getElementById("button-"+id).innerHTML = "Added"
+      document.getElementById("button-"+id).setAttribute("disabled",true)
   }
 
   function OrderProducts(){
-    console.log(orderedProducts)
+
+    if(number && JSON.stringify(orderedProducts) !== '{}'){
+      const order = {
+        items : Object.values(orderedProducts),
+        tableId : number,
+        status : "PENDING",
+        time : new Date()
+      }
+
+      fetchCurrentOrderByTableId(number).then(response => {
+        const currentOrderArray = response.data
+
+        if(currentOrderArray.length > 0){
+            const currentOrder = currentOrderArray[0]
+            const orderStatus = currentOrder.status
+            if(orderStatus === 'COMPLETED'){
+
+                currentOrder.status = 'CLOSED'
+                updateOrderItems(currentOrder)
+
+
+                orderItems(order)
+
+                alert("Previous Order closed and new order placed")
+                window.location.reload(false);
+            }
+            else{
+                const currentOrderItems = currentOrder.items
+                currentOrder.items = [...currentOrderItems].concat(Object.values(orderedProducts))
+                updateOrderItems(currentOrder)
+                alert("Order updated Succesfully")
+            }
+        }else{
+            orderItems(order)
+            alert("Order placed Succesfully")
+        }
+
+      })
+
+    }else if (JSON.stringify(orderedProducts) === '{}'){
+      alert("Please add atleast one item")
+    }else{
+      alert("Please select a table")
+    }
+      
+  }
+
+  const orderItems = (order) => {
+    placeOrder(order).then(response => {
+      window.location.reload(false);
+    }).catch(error => console.log(error))
+  }
+
+  const updateOrderItems = (currentOrder) => {
+    updateOrder(currentOrder,currentOrder.id).then(response => {
+      window.location.reload(false);
+    }).catch(error => console.log(error))
+  }
+
+  const viewOrderDetails = () => {
+    if(number == 0){
+      alert("Please select the table")
+    }else{
+        if(orders.length > 0 && returnOrderId(number) > 0){
+          navigate(`/view-order/${returnOrderId(number)}`)
+        }else{
+          alert("No Order details found")
+        }
+    }
+  
+  }
+
+  
+  function returnOrderId(num){
+    const orderDetails = orders.filter(order => order.tableId == num).filter(order => order.status == 'COMPLETED' || order.status == 'PENDING')
+    if(orderDetails.length > 0){
+      return orderDetails[0].id
+    }else{
+      return 0
+    }
+  }
+
+  const makeTableAvailable = () => {
+    if(number == 0){
+      alert("Please select the table")
+    }else{
+
+      fetchCurrentOrderByTableId(number).then(response => {
+
+        const currentOrderArray = response.data
+
+        if(currentOrderArray.length > 0){
+          const currentOrder = currentOrderArray[0]
+          console.log(currentOrder.status)
+          currentOrder.status == 'COMPLETED' ?  currentOrder.status = 'CLOSED' : currentOrder.status = 'CANCELLED'
+          updateOrder(currentOrder, currentOrder.id)
+        }
+
+      }).catch(error => console.log(error))
+
+
+      const tableObject = tablesData.filter(table => table.id == number)[0]
+
+      tableObject.status = 'OPEN'
+      tableObject.waiterId = 0
+
+      updateTable(tableObject, tableObject.id)
+      alert ("Table is updated as OPEN")
+      window.location.reload(false);
+    } 
+
   }
 
   return (
@@ -61,7 +212,7 @@ const WaiterComponent = () => {
                   tables.map((num, index) => (
                     <div style={{display:'inline'}} key={index}>
                         <button 
-                          className = {number == num ? activeBtn : inactiveBtn}
+                          className = {getTableButton(num)}
                           onClick = {() => setNumber(num)}
                         >
                           {num}
@@ -71,7 +222,9 @@ const WaiterComponent = () => {
                 }
 
                 <div className='form-group mt-3'> 
-                      <button className='btn btn-primary' onClick={(e) => OrderProducts(e)}>Order</button>
+                      <button className='btn btn-primary m-2' onClick={(e) => OrderProducts(e)}>Order</button>
+                      <button className='btn btn-info m-2' onClick={(e) => viewOrderDetails(e)}>View Order</button>
+                      <button className='btn btn-secondary m-2' onClick={(e) => makeTableAvailable(e)}>Make Available</button>
                 </div>
 
                 
